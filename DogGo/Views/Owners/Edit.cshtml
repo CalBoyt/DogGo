@@ -1,0 +1,62 @@
+﻿@model DogGo.Models.ViewModels.OwnerFormViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Owner</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="@Model.Owner.Id" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Owner.Email" class="control-label"></label>
+                <input asp-for="@Model.Owner.Email" class="form-control" />
+                <span asp-validation-for="@Model.Owner.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Owner.Name" class="control-label"></label>
+                <input asp-for="@Model.Owner.Name" class="form-control" />
+                <span asp-validation-for="@Model.Owner.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Owner.Address" class="control-label"></label>
+                <input asp-for="@Model.Owner.Address" class="form-control" />
+                <span asp-validation-for="@Model.Owner.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Owner.NeighborhoodId" class="control-label"></label>
+                <select asp-for="Owner.NeighborhoodId" class="form-control">
+                    <option value="">Select Neighborhood</option>
+                    @foreach (Neighborhood neighborhood in Model.Neighborhoods)
+                    {
+                        <option value="@neighborhood.Id">@neighborhood.Name</option>
+                    }
+                </select>                
+                <span asp-validation-for="@Model.Owner.NeighborhoodId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Owner.Phone" class="control-label"></label>
+                <input asp-for="@Model.Owner.Phone" class="form-control" />
+                <span asp-validation-for="@Model.Owner.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
